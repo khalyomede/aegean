@@ -4,6 +4,8 @@ Include the content of imports statements down to the importing file.
 
 ![npm](https://img.shields.io/npm/v/aegean.svg)
 ![NpmLicense](https://img.shields.io/npm/l/aegean.svg)
+![Codeship](https://img.shields.io/codeship/06d78710-d8ad-0136-0ad9-0ac09399d815.svg)
+
 
 Before:
 
