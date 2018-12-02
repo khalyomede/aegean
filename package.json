@@ -1,5 +1,5 @@
 {
-	"name": "@khalyomede/aegean",
+	"name": "aegean",
 	"version": "0.1.0",
 	"description": "Include the content of imports statements down to the importing file.",
 	"main": "dist/main.js",
@@ -7,7 +7,8 @@
 	"author": "Khalyomede <khalyomede@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"test": "mocha test"
+		"test": "mocha test",
+		"dev": "gulp watch:js"
 	},
 	"devDependencies": {
 		"@types/node": "^10.12.11",
