@@ -51,6 +51,8 @@ function inline(content: string, path: string): string {
 
 	const statements = ast.program.body;
 
+	let gap = 0;
+
 	for (const statement of statements) {
 		if (statement.type === "ImportDeclaration") {
 			const subPath =
@@ -74,9 +76,11 @@ function inline(content: string, path: string): string {
 			const subResult = inline(subContent, subPath);
 
 			result =
-				result.slice(0, statement.start) +
+				result.substring(0, statement.start + gap) +
 				subResult +
-				result.slice(statement.end);
+				result.substring(statement.end + gap);
+
+			gap += subResult.length - (statement.end - statement.start);
 		}
 	}
 

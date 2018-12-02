@@ -41,6 +41,7 @@ function inline(content, path) {
         allowImportExportEverywhere: true
     });
     var statements = ast.program.body;
+    var gap = 0;
     for (var _i = 0, statements_1 = statements; _i < statements_1.length; _i++) {
         var statement = statements_1[_i];
         if (statement.type === "ImportDeclaration") {
@@ -58,9 +59,10 @@ function inline(content, path) {
             var subContent = fs_1.readFileSync(subPath).toString();
             var subResult = inline(subContent, subPath);
             result =
-                result.slice(0, statement.start) +
+                result.substring(0, statement.start + gap) +
                     subResult +
-                    result.slice(statement.end);
+                    result.substring(statement.end + gap);
+            gap += subResult.length - (statement.end - statement.start);
         }
     }
     return result;
