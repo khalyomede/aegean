@@ -41,13 +41,13 @@ const result = add(1, '+', 2); // 3
 With npm:
 
 ```bash
-npm install --save-dev @khalyomede/aegean
+npm install --save-dev aegean
 ```
 
 With yarn:
 
 ```bash
-yarn add --dev @khalyomede/aegean
+yarn add --dev aegean
 ```
 
 ## Usage
