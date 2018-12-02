@@ -1,0 +1,23 @@
+{
+	"name": "@khalyomede/aegean",
+	"version": "0.1.0",
+	"description": "Include the content of imports statements down to the importing file.",
+	"main": "dist/main.js",
+	"repository": "https://github.com/khalyomede/aegean",
+	"author": "Khalyomede <khalyomede@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"test": "mocha test"
+	},
+	"devDependencies": {
+		"@types/node": "^10.12.11",
+		"chai": "^4.2.0",
+		"gulp": "^3.9.1",
+		"gulp-typescript": "^5.0.0-alpha.3",
+		"mocha": "^5.2.0",
+		"typescript": "^3.2.1"
+	},
+	"dependencies": {
+		"babylon": "^6.18.0"
+	}
+}
