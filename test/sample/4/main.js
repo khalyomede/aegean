@@ -1,3 +1,8 @@
 import "echo";
+import "is_string";
 
-echo("hello world");
+const input = "hello world";
+
+if(is_string(input)) {
+    echo(input);
+}

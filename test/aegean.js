@@ -99,27 +99,13 @@ describe("aegean", function() {
 		}).to.throw(`file "${path}" does not exist`);
 	});
 
-	it("should throw an Error if the path inside a sub import file does not target a file", function() {
-		expect(function() {
-			aegean(__dirname + "/sample/4/main.js");
-		}).to.throw(Error);
-	});
-
-	it("should throw an Error message if the path inside a sub import file does not target a file", function() {
-		const path = __dirname + "/sample/4/folder.js";
-
-		expect(function() {
-			aegean(__dirname + "/sample/4/main.js");
-		}).to.throw(`path "${path}" should target a file`);
-	});
-
 	// Bug fix
 	// Multiples import in a single file cause the code of an import statement to overlap codes of others import statements.
 	it("should not overlap the code when using multiples imports inside a single file", function() {
 		expected = fs
-			.readFileSync(__dirname + "/sample/5/expected.js")
+			.readFileSync(__dirname + "/sample/4/expected.js")
 			.toString();
-		actual = aegean(__dirname + "/sample/5/main.js");
+		actual = aegean(__dirname + "/sample/4/main.js");
 
 		expect(actual).to.equal(expected);
 	});
