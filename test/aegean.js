@@ -112,4 +112,15 @@ describe("aegean", function() {
 			aegean(__dirname + "/sample/4/main.js");
 		}).to.throw(`path "${path}" should target a file`);
 	});
+
+	// Bug fix
+	// Multiples import in a single file cause the code of an import statement to overlap codes of others import statements.
+	it("should not overlap the code when using multiples imports inside a single file", function() {
+		expected = fs
+			.readFileSync(__dirname + "/sample/5/expected.js")
+			.toString();
+		actual = aegean(__dirname + "/sample/5/main.js");
+
+		expect(actual).to.equal(expected);
+	});
 });
