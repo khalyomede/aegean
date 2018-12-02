@@ -2,6 +2,9 @@
 
 Include the content of imports statements down to the importing file.
 
+![npm](https://img.shields.io/npm/v/aegean.svg)
+![NpmLicense](https://img.shields.io/npm/l/aegean.svg)
+
 Before:
 
 ```javascript
