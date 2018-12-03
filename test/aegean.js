@@ -34,6 +34,15 @@ describe("aegean", function() {
 		expect(actual).to.equal(expected);
 	});
 
+	it("should ignore other type of import method like default import", function() {
+		const expected = fs
+			.readFileSync(__dirname + "/sample/5/expected.js")
+			.toString();
+		const actual = aegean(__dirname + "/sample/5/main.js");
+
+		expect(actual).to.equal(expected);
+	});
+
 	// Exceptions
 	it("should not throw an Error if the first parameter is a string", function() {
 		expect(function() {
