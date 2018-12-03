@@ -38,8 +38,8 @@ const result = add(1, '+', 2); // 3
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Tests](#tests)
-- [Dependencies](#dependencies)
+- [Supported imports methods](#supported-imports-methods)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -168,6 +168,10 @@ function echo(mixed) {
 
 echo("hello world");
 ```
+
+## Supported imports methods
+
+- `import 'path/to/file';`
 
 ## Tests
 
