@@ -20,5 +20,11 @@
 	},
 	"dependencies": {
 		"babylon": "^6.18.0"
-	}
+	},
+	"keywords": [
+		"inline",
+		"import",
+		"es6",
+		"statement"
+	]
 }
