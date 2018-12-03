@@ -173,40 +173,42 @@ echo("hello world");
 
 - `import 'path/to/file';`
 
-## Tests
+## Contributing
 
-With npm:
+1. Install dependencies
+
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn install
+```
+
+2. Light on dev (transpiling typescript to javascript)
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+yarn dev
+```
+
+3. Add your feature on `/src/main.ts`
+4. Append your tests on `/test/aegean.js`
+5. Run tests
 
 ```bash
 npm run test
 ```
 
-With yarn:
+or
 
 ```bash
 yarn test
-```
-
-## Dependencies
-
-- Dependencies
-  - babylon
-- Dev dependencies
-  - typescript
-  - @node/types
-  - gulp
-  - gulp-typescript
-  - mocha
-  - chai
-
-With npm:
-
-```bash
-npm install --save-dev typescript @node/types gulp gulp-typescript mocha chai && npm install --save babylon
-```
-
-With yarn:
-
-```bash
-yarn add --dev typescript @node/types gulp gulp-typescript mocha chai && yarn add babylon
 ```
