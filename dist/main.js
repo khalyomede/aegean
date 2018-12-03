@@ -45,24 +45,26 @@ function inline(content, path) {
     for (var _i = 0, statements_1 = statements; _i < statements_1.length; _i++) {
         var statement = statements_1[_i];
         if (statement.type === "ImportDeclaration") {
-            var subPath = path_1.dirname(path) +
-                "/" +
-                statement.source.value +
-                (statement.source.value.endsWith(".js") ? "" : ".js");
-            if (fs_1.existsSync(subPath) === false) {
-                throw new Error("file \"" + subPath + "\" does not exist");
+            if (statement.specifiers.length === 0) {
+                var subPath = path_1.dirname(path) +
+                    "/" +
+                    statement.source.value +
+                    (statement.source.value.endsWith(".js") ? "" : ".js");
+                if (fs_1.existsSync(subPath) === false) {
+                    throw new Error("file \"" + subPath + "\" does not exist");
+                }
+                var stat = fs_1.lstatSync(subPath);
+                if (stat.isFile() === false) {
+                    throw new Error("path \"" + subPath + "\" should target a file");
+                }
+                var subContent = fs_1.readFileSync(subPath).toString();
+                var subResult = inline(subContent, subPath);
+                result =
+                    result.substring(0, statement.start + gap) +
+                        subResult +
+                        result.substring(statement.end + gap);
+                gap += subResult.length - (statement.end - statement.start);
             }
-            var stat = fs_1.lstatSync(subPath);
-            if (stat.isFile() === false) {
-                throw new Error("path \"" + subPath + "\" should target a file");
-            }
-            var subContent = fs_1.readFileSync(subPath).toString();
-            var subResult = inline(subContent, subPath);
-            result =
-                result.substring(0, statement.start + gap) +
-                    subResult +
-                    result.substring(statement.end + gap);
-            gap += subResult.length - (statement.end - statement.start);
         }
     }
     return result;

@@ -55,32 +55,34 @@ function inline(content: string, path: string): string {
 
 	for (const statement of statements) {
 		if (statement.type === "ImportDeclaration") {
-			const subPath =
-				dirname(path) +
-				"/" +
-				statement.source.value +
-				(statement.source.value.endsWith(".js") ? "" : ".js");
+			if (statement.specifiers.length === 0) {
+				const subPath =
+					dirname(path) +
+					"/" +
+					statement.source.value +
+					(statement.source.value.endsWith(".js") ? "" : ".js");
 
-			if (existsSync(subPath) === false) {
-				throw new Error(`file "${subPath}" does not exist`);
+				if (existsSync(subPath) === false) {
+					throw new Error(`file "${subPath}" does not exist`);
+				}
+
+				const stat = lstatSync(subPath);
+
+				if (stat.isFile() === false) {
+					throw new Error(`path "${subPath}" should target a file`);
+				}
+
+				const subContent = readFileSync(subPath).toString();
+
+				const subResult = inline(subContent, subPath);
+
+				result =
+					result.substring(0, statement.start + gap) +
+					subResult +
+					result.substring(statement.end + gap);
+
+				gap += subResult.length - (statement.end - statement.start);
 			}
-
-			const stat = lstatSync(subPath);
-
-			if (stat.isFile() === false) {
-				throw new Error(`path "${subPath}" should target a file`);
-			}
-
-			const subContent = readFileSync(subPath).toString();
-
-			const subResult = inline(subContent, subPath);
-
-			result =
-				result.substring(0, statement.start + gap) +
-				subResult +
-				result.substring(statement.end + gap);
-
-			gap += subResult.length - (statement.end - statement.start);
 		}
 	}
 
