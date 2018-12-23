@@ -5,6 +5,7 @@ Include the content of imports statements down to the importing file.
 ![npm](https://img.shields.io/npm/v/aegean.svg)
 ![NpmLicense](https://img.shields.io/npm/l/aegean.svg)
 ![Codeship](https://img.shields.io/codeship/06d78710-d8ad-0136-0ad9-0ac09399d815.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/khalyomede/aegean/badge.svg?targetFile=package.json)](https://snyk.io/test/github/khalyomede/aegean?targetFile=package.json)
 
 
 Before:
@@ -73,7 +74,7 @@ console.log(result); // 3
 
 _example-1.js_
 ```javascript
-const aegan = require("../dist/main");
+const aegan = require("aegean");
 const fs = require("fs");
 
 const result = aegan("example/example-1/main.js");
@@ -140,7 +141,7 @@ _example-2.js_
 
 ```javascript
 const fs = require("fs");
-const aegean = require("../dist/main");
+const aegean = require("aegean");
 
 const result = aegean(__dirname + "/example-2/main.js");
 
