@@ -46,12 +46,20 @@ function inline(content, path) {
         var statement = statements_1[_i];
         if (statement.type === "ImportDeclaration") {
             if (statement.specifiers.length === 0) {
-                var subPath = path_1.dirname(path) +
-                    "/" +
-                    statement.source.value +
-                    (statement.source.value.endsWith(".js") ? "" : ".js");
+                var regexpLocalFile = /^\.\//;
+                var subPath = "";
+                if (regexpLocalFile.test(statement.source.value)) {
+                    subPath =
+                        path_1.dirname(path) +
+                            "/" +
+                            statement.source.value +
+                            (statement.source.value.endsWith(".js") ? "" : ".js");
+                }
+                else {
+                    subPath = require.resolve(statement.source.value);
+                }
                 if (fs_1.existsSync(subPath) === false) {
-                    throw new Error("file \"" + subPath + "\" does not exist");
+                    throw new Error("file \"" + path_1.resolve(__dirname, subPath) + "\" does not exist");
                 }
                 var stat = fs_1.lstatSync(subPath);
                 if (stat.isFile() === false) {

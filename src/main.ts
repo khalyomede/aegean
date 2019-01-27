@@ -1,5 +1,5 @@
 import { readFileSync, lstatSync, existsSync } from "fs";
-import { dirname } from "path";
+import { dirname, resolve } from "path";
 import * as babylon from "babylon";
 
 /**
@@ -56,14 +56,23 @@ function inline(content: string, path: string): string {
 	for (const statement of statements) {
 		if (statement.type === "ImportDeclaration") {
 			if (statement.specifiers.length === 0) {
-				const subPath =
-					dirname(path) +
-					"/" +
-					statement.source.value +
-					(statement.source.value.endsWith(".js") ? "" : ".js");
+				const regexpLocalFile = /^\.\//;
+				let subPath = "";
+
+				if (regexpLocalFile.test(statement.source.value)) {
+					subPath =
+						dirname(path) +
+						"/" +
+						statement.source.value +
+						(statement.source.value.endsWith(".js") ? "" : ".js");
+				} else {
+					subPath = require.resolve(statement.source.value);
+				}
 
 				if (existsSync(subPath) === false) {
-					throw new Error(`file "${subPath}" does not exist`);
+					throw new Error(
+						`file "${resolve(__dirname, subPath)}" does not exist`
+					);
 				}
 
 				const stat = lstatSync(subPath);
