@@ -11,7 +11,7 @@ Include the content of imports statements down to the importing file.
 Before:
 
 ```javascript
-import 'helper/add';
+import './helper/add';
 
 const result = add(1, '+', 2); // 3
 ```
@@ -60,6 +60,7 @@ yarn add --dev aegean
 
 - [Example 1: simple usage](#example-1-simple-usage)
 - [Example 2: importing file with nested imports](#example-2-importing-file-with-nested-imports)
+- [Example 3: importing a node module](#example-3-importing-a-node-module)
 
 ### Example 1: simple usage
 
@@ -170,9 +171,47 @@ function echo(mixed) {
 echo("hello world");
 ```
 
+### Example 3: importing a node module
+
+_main.js_
+
+```javascript
+import "bootstrap/dist/js/bootstrap"
+```
+
+_example-3.js_
+
+```javascript
+const aegean = require('aegean');
+const fs = require('fs');
+
+const bootstrap4 = aegean(__dirname + '/main.js');
+
+fs.writeFileSync(__dirname + '/inlined.js', bootstrap4);
+```
+
+_inlined.js_
+
+```javascript
+/*!
+  * Bootstrap v4.2.1 (https://getbootstrap.com/)
+  * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
+
+  ...
+```
+
 ## Supported imports methods
 
-- `import 'path/to/file';`
+```javascript
+import './path/to/local/file';
+import './path/to/local/file.js';
+import 'path/to/node/module/file';
+import 'path/to/node/module/file.js';
+```
 
 ## Contributing
 
