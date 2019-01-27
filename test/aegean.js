@@ -128,4 +128,16 @@ describe("aegean", function() {
 
 		expect(actual).to.be.equal(expected);
 	});
+
+	it("should throw an Error if the module path does not exists", function() {
+		expect(function() {
+			aegean(__dirname + "/sample/7/main.js");
+		}).to.throw(Error);
+	});
+
+	it("should throw an Error message if the module path does not exists", function() {
+		expect(function() {
+			aegean(__dirname + "/sample/7/main.js");
+		}).to.throw("Cannot find module 'khalyomede/index'");
+	});
 });
