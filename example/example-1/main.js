@@ -1,4 +1,4 @@
-import "add";
+import "./add";
 
 const result = add(1, "+", 2);
 

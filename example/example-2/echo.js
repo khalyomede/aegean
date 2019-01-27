@@ -1,4 +1,4 @@
-import "is_string";
+import "./is_string";
 
 function echo(mixed) {
 	if (is_string(mixed) === false) {
