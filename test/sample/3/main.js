@@ -1,3 +1,3 @@
-import "echo";
+import "./echo";
 
 echo("hello world");

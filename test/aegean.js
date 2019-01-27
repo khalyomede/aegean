@@ -1,6 +1,7 @@
 const chai = require("chai");
 const aegean = require("../dist/main");
 const fs = require("fs");
+const pt = require("path");
 const expect = chai.expect;
 const types = {
 	null: null,
@@ -105,7 +106,7 @@ describe("aegean", function() {
 
 		expect(function() {
 			aegean(__dirname + "/sample/3/main.js");
-		}).to.throw(`file "${path}" does not exist`);
+		}).to.throw(`file "${pt.resolve(__dirname, path)}" does not exist`);
 	});
 
 	// Bug fix
@@ -117,5 +118,14 @@ describe("aegean", function() {
 		actual = aegean(__dirname + "/sample/4/main.js");
 
 		expect(actual).to.equal(expected);
+	});
+
+	it("should import modules from node modules with a relative path", function() {
+		expected = fs
+			.readFileSync(__dirname + "/../node_modules/arr-union/index.js")
+			.toString();
+		actual = aegean(__dirname + "/sample/6/main.js");
+
+		expect(actual).to.be.equal(expected);
 	});
 });

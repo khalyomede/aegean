@@ -1,5 +1,5 @@
-import "echo";
-import "is_string";
+import "./echo";
+import "./is_string";
 
 const input = "hello world";
 
