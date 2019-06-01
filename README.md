@@ -4,35 +4,34 @@ Include the content of imports statements down to the importing file.
 
 ![npm](https://img.shields.io/npm/v/aegean.svg)
 ![NpmLicense](https://img.shields.io/npm/l/aegean.svg)
-![Codeship](https://img.shields.io/codeship/06d78710-d8ad-0136-0ad9-0ac09399d815.svg)
+[![Build Status](https://travis-ci.com/khalyomede/aegean.svg?branch=master)](https://travis-ci.com/khalyomede/aegean)
 [![Known Vulnerabilities](https://snyk.io/test/github/khalyomede/aegean/badge.svg?targetFile=package.json)](https://snyk.io/test/github/khalyomede/aegean?targetFile=package.json)
-
 
 Before:
 
 ```javascript
-import './helper/add';
+import "./helper/add";
 
-const result = add(1, '+', 2); // 3
+const result = add(1, "+", 2); // 3
 ```
 
 After:
 
 ```javascript
 function add(left, operator, right) {
-    let result = 0;
+	let result = 0;
 
-    switch(operator) {
-        case '+':
-            result = left + right;
+	switch (operator) {
+		case "+":
+			result = left + right;
 
-            break;
-    }
+			break;
+	}
 
-    return result;
+	return result;
 }
 
-const result = add(1, '+', 2); // 3
+const result = add(1, "+", 2); // 3
 ```
 
 ## Summary
@@ -65,6 +64,7 @@ yarn add --dev aegean
 ### Example 1: simple usage
 
 _main.js_
+
 ```javascript
 import "add";
 
@@ -74,6 +74,7 @@ console.log(result); // 3
 ```
 
 _example-1.js_
+
 ```javascript
 const aegan = require("aegean");
 const fs = require("fs");
@@ -84,20 +85,20 @@ fs.writeFileSync("example/example-1/inlined-main.js", result);
 ```
 
 _inlined-main.js_
+
 ```javascript
 function add(left, operator, right) {
-  let result = 0;
+	let result = 0;
 
-  switch (operator) {
-    case "+":
-      result = left + right;
+	switch (operator) {
+		case "+":
+			result = left + right;
 
-      break;
-  }
+			break;
+	}
 
-  return result;
+	return result;
 }
-
 
 const result = add(1, "+", 2);
 
@@ -110,9 +111,7 @@ _is_string.js_
 
 ```javascript
 function is_string(mixed) {
-  return (
-    mixed !== null && mixed !== undefined && mixed.constructor === String
-  );
+	return mixed !== null && mixed !== undefined && mixed.constructor === String;
 }
 ```
 
@@ -122,14 +121,14 @@ _echo.js_
 import "is_string";
 
 function echo(mixed) {
-  if (is_string(mixed) === false) {
-    throw new Error("echo expects parameter 1 to be a string");
-  }
+	if (is_string(mixed) === false) {
+		throw new Error("echo expects parameter 1 to be a string");
+	}
 
-  console.log(mixed);
+	console.log(mixed);
 }
 ```
- 
+
 _main.js_
 
 ```javascript
@@ -153,20 +152,16 @@ _inlined-main.js_
 
 ```javascript
 function is_string(mixed) {
-  return (
-    mixed !== null && mixed !== undefined && mixed.constructor === String
-  );
+	return mixed !== null && mixed !== undefined && mixed.constructor === String;
 }
-
 
 function echo(mixed) {
-  if (is_string(mixed) === false) {
-    throw new Error("echo expects parameter 1 to be a string");
-  }
+	if (is_string(mixed) === false) {
+		throw new Error("echo expects parameter 1 to be a string");
+	}
 
-  console.log(mixed);
+	console.log(mixed);
 }
-
 
 echo("hello world");
 ```
@@ -176,18 +171,18 @@ echo("hello world");
 _main.js_
 
 ```javascript
-import "bootstrap/dist/js/bootstrap"
+import "bootstrap/dist/js/bootstrap";
 ```
 
 _example-3.js_
 
 ```javascript
-const aegean = require('aegean');
-const fs = require('fs');
+const aegean = require("aegean");
+const fs = require("fs");
 
-const bootstrap4 = aegean(__dirname + '/main.js');
+const bootstrap4 = aegean(__dirname + "/main.js");
 
-fs.writeFileSync(__dirname + '/inlined.js', bootstrap4);
+fs.writeFileSync(__dirname + "/inlined.js", bootstrap4);
 ```
 
 _inlined.js_
@@ -207,10 +202,10 @@ _inlined.js_
 ## Supported imports methods
 
 ```javascript
-import './path/to/local/file';
-import './path/to/local/file.js';
-import 'path/to/node/module/file';
-import 'path/to/node/module/file.js';
+import "./path/to/local/file";
+import "./path/to/local/file.js";
+import "path/to/node/module/file";
+import "path/to/node/module/file.js";
 ```
 
 ## Contributing
