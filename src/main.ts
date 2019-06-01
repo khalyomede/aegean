@@ -64,15 +64,34 @@ function inline(content: string, path: string): string {
 						dirname(path) +
 						"/" +
 						statement.source.value +
-						(statement.source.value.endsWith(".js") ? "" : ".js");
+						(statement.source.value.endsWith(".js") ||
+						statement.source.value.endsWith(".ts")
+							? ""
+							: ".ts");
 				} else {
 					subPath = require.resolve(statement.source.value);
 				}
 
 				if (existsSync(subPath) === false) {
-					throw new Error(
-						`file "${resolve(__dirname, subPath)}" does not exist`
-					);
+					// trying with ".ts"
+					if (regexpLocalFile.test(statement.source.value)) {
+						subPath =
+							dirname(path) +
+							"/" +
+							statement.source.value +
+							(statement.source.value.endsWith(".js") ||
+							statement.source.value.endsWith(".ts")
+								? ""
+								: ".js");
+					} else {
+						subPath = require.resolve(statement.source.value);
+					}
+
+					if (existsSync(subPath) === false) {
+						throw new Error(
+							`file "${resolve(__dirname, subPath)}" does not exist`
+						);
+					}
 				}
 
 				const stat = lstatSync(subPath);
