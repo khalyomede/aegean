@@ -1,6 +1,6 @@
 {
 	"name": "aegean",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Include the content of imports statements down to the importing file.",
 	"main": "lib/main.js",
 	"repository": "https://github.com/khalyomede/aegean",
