@@ -1,8 +1,7 @@
-const chai = require("chai");
-const aegean = require("../dist/main");
-const fs = require("fs");
-const pt = require("path");
-const expect = chai.expect;
+import { expect } from "chai";
+import aegean from "../lib/main";
+import fs from "fs";
+import pt from "path";
 const types = {
 	null: null,
 	undefined: undefined,
@@ -112,19 +111,19 @@ describe("aegean", function() {
 	// Bug fix
 	// Multiples import in a single file cause the code of an import statement to overlap codes of others import statements.
 	it("should not overlap the code when using multiples imports inside a single file", function() {
-		expected = fs
+		const expected = fs
 			.readFileSync(__dirname + "/sample/4/expected.js")
 			.toString();
-		actual = aegean(__dirname + "/sample/4/main.js");
+		const actual = aegean(__dirname + "/sample/4/main.js");
 
 		expect(actual).to.equal(expected);
 	});
 
 	it("should import modules from node modules with a relative path", function() {
-		expected = fs
+		const expected = fs
 			.readFileSync(__dirname + "/../node_modules/arr-union/index.js")
 			.toString();
-		actual = aegean(__dirname + "/sample/6/main.js");
+		const actual = aegean(__dirname + "/sample/6/main.js");
 
 		expect(actual).to.be.equal(expected);
 	});

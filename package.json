@@ -2,20 +2,29 @@
 	"name": "aegean",
 	"version": "0.2.0",
 	"description": "Include the content of imports statements down to the importing file.",
-	"main": "dist/main.js",
+	"main": "lib/main.js",
 	"repository": "https://github.com/khalyomede/aegean",
 	"author": "Khalyomede <khalyomede@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"test": "mocha test",
-		"watch": "gulp listen"
+		"test": "nyc mocha --require @babel/register test",
+		"start": "gulp build && gulp start",
+		"build": "gulp build"
 	},
 	"devDependencies": {
+		"@babel/core": "7.*",
+		"@babel/preset-env": "7.*",
+		"@babel/register": "7.*",
 		"@types/node": "10.*",
+		"babelify": "10.*",
 		"chai": "4.*",
 		"gulp": "4.*",
+		"gulp-clean": "0.*",
+		"gulp-plumber": "1.*",
 		"gulp-typescript": "5.*",
 		"mocha": "5.*",
+		"nyc": "14.*",
+		"tinyify": "2.*",
 		"typescript": "3.*"
 	},
 	"dependencies": {
@@ -26,5 +35,8 @@
 		"import",
 		"es6",
 		"statement"
+	],
+	"files": [
+		"lib/main.js"
 	]
 }
