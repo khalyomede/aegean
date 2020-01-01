@@ -9,7 +9,7 @@
 	"scripts": {
 		"test": "nyc mocha --require @babel/register test",
 		"start": "ncu && gulp build && gulp start",
-		"build": "ncu && gulp build"
+		"build": "ncu && gulp build && tsc --declaration src/main.ts && mv src/main.d.ts lib/main.d.ts && rm src/main.js"
 	},
 	"devDependencies": {
 		"@babel/core": "7.*",
@@ -39,6 +39,7 @@
 		"statement"
 	],
 	"files": [
-		"lib/main.js"
+		"lib/main.js",
+		"lib/main.d.ts"
 	]
 }
