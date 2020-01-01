@@ -11,7 +11,7 @@ const types = {
 	"a regular expression": new RegExp(),
 	"a symbol": Symbol(),
 	"a float": 42.14,
-	"an object": new Object()
+	"an object": new Object(),
 };
 
 describe("aegean", () => {

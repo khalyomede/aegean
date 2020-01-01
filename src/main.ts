@@ -46,7 +46,7 @@ function inline(content: string, path: string): string {
 	let result = content;
 
 	const ast = babylon.parse(content, {
-		allowImportExportEverywhere: true
+		allowImportExportEverywhere: true,
 	});
 
 	const statements = ast.program.body;
@@ -89,7 +89,10 @@ function inline(content: string, path: string): string {
 
 					if (existsSync(subPath) === false) {
 						throw new Error(
-							`file "${resolve(__dirname, subPath)}" does not exist`
+							`file "${resolve(
+								__dirname,
+								subPath
+							)}" does not exist`
 						);
 					}
 				}

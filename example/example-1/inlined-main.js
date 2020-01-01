@@ -11,7 +11,6 @@ function add(left, operator, right) {
 	return result;
 }
 
-
 const result = add(1, "+", 2);
 
 console.log(result); // 3
