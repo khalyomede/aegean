@@ -9,7 +9,8 @@
 	"scripts": {
 		"test": "nyc mocha --require @babel/register test",
 		"start": "ncu && gulp build && gulp start",
-		"build": "ncu && gulp build && tsc --declaration src/main.ts && mv src/main.d.ts lib/main.d.ts && rm src/main.js"
+		"build": "ncu && gulp build && tsc --declaration src/main.ts && mv src/main.d.ts lib/main.d.ts && rm src/main.js",
+		"release": "np"
 	},
 	"devDependencies": {
 		"@babel/core": "7.*",
@@ -24,6 +25,7 @@
 		"gulp-plumber": "1.*",
 		"gulp-typescript": "5.*",
 		"mocha": "6.*",
+		"np": "5.*",
 		"npm-check-updates": "4.*",
 		"nyc": "15.*",
 		"tinyify": "2.*",
